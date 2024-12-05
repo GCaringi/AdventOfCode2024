@@ -11,7 +11,7 @@ Console.WriteLine("Welcome to the Advent of Code 2024");
 Day1 day1 = new(InputType.Input);
 Day2 day2 = new(InputType.Input);
 Day3 day3 = new(InputType.Input);
-Day4 day4 = new(InputType.Example);
+Day4 day4 = new(InputType.Input);
 
 #endregion
 
@@ -27,5 +27,6 @@ Day4 day4 = new(InputType.Example);
 //Console.WriteLine(day3.CalculateMultWithCommand());
 
 Console.WriteLine(day4.SearchXmasWords());
+Console.WriteLine(day4.SearchCrossXmasWords());
 
 #endregion

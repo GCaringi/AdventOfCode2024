@@ -1,3 +1,4 @@
+using System.Text;
 using CodeRunner.Common;
 using CodeRunner.Day4.Inputs;
 
@@ -23,17 +24,17 @@ public class Day4(InputType type)
                     int count = 0;
                     
                     //Check left-up - up - right-up
-                    //Controllo in alto
                     if (i >= 3)
                     {
-                        var mobileIndex = i;
+                        correctValue = true;
+                        var mobileIndex = i-1;
                         count = 0;
                         
                         while (count < 3 && correctValue)
                         {
                             if (input.Matrix[mobileIndex][j] == targetSymbol[count])
                             {
-                                mobileIndex = -1;
+                                mobileIndex -= 1;
                                 count++;
                             }
                             else
@@ -47,21 +48,21 @@ public class Day4(InputType type)
                             numberXmasWord++;
                         }
                     }
-
-                    //Controllo in alto a sinistra
+                    
                     if (i >= 3 && j >= 3)
-                    {
+                    {   
+                        correctValue = true;
                         count = 0;
                         
-                        var verticalIndex = i;
-                        var orizontalIndex = j;
+                        var verticalIndex = i-1;
+                        var orizontalIndex = j-1;
 
                         while (count < 3 && correctValue)
                         {
                             if (input.Matrix[verticalIndex][orizontalIndex] == targetSymbol[count])
                             {
-                                verticalIndex = -1;
-                                orizontalIndex = -1;
+                                verticalIndex -= 1;
+                                orizontalIndex -= 1;
                                 count++;
                             }
                             else
@@ -75,21 +76,21 @@ public class Day4(InputType type)
                             numberXmasWord++;
                         }
                     }
-
-                    //Controllo in alto a destra
+                    
                     if (i >= 3 && j <= input.Matrix[i].Count - 4)
                     {
+                        correctValue = true;
                         count = 0;
                         
-                        var verticalIndex = i;
-                        var orizontalIndex = j;
+                        var verticalIndex = i-1;
+                        var orizontalIndex = j+1;
 
                         while (count < 3 && correctValue)
                         {
                             if (input.Matrix[verticalIndex][orizontalIndex]== targetSymbol[count])
                             {
-                                verticalIndex = -1;
-                                orizontalIndex = +1;
+                                verticalIndex -= 1;
+                                orizontalIndex += 1;
                                 count++;
                             }
                             else
@@ -105,17 +106,18 @@ public class Day4(InputType type)
                     }
                     
                     //Check left - right
-                    //Controllo la sinistra
                     if (j >= 3)
                     {
-                        var mobileIndex = j;
+                        correctValue = true;
                         count = 0;
+                        
+                        var mobileIndex = j-1;
                         
                         while (count < 3 && correctValue)
                         {
                             if (input.Matrix[i][mobileIndex] == targetSymbol[count])
                             {
-                                mobileIndex = -1;
+                                mobileIndex -= 1;
                                 count++;
                             }
                             else
@@ -130,17 +132,18 @@ public class Day4(InputType type)
                         }
                     }
                     
-                    //Controllo la destra
                     if (j <= input.Matrix[i].Count - 4)
                     {
-                        var mobileIndex = i;
+                        correctValue = true;
                         count = 0;
+                        
+                        var mobileIndex = j+1;
                         
                         while (count < 3 && correctValue)
                         {
                             if (input.Matrix[i][mobileIndex] == targetSymbol[count])
                             {
-                                mobileIndex = +1;
+                                mobileIndex += 1;
                                 count++;
                             }
                             else
@@ -156,17 +159,18 @@ public class Day4(InputType type)
                     }
                     
                     //Check left-down - down - right-down
-                    //Controllo in basso
                     if (i <= input.Matrix.Count - 4)
                     {
-                        var mobileIndex = i;
+                        correctValue = true;
                         count = 0;
+                        
+                        var mobileIndex = i+1;
                         
                         while (count < 3 && correctValue)
                         {
                             if (input.Matrix[mobileIndex][j] == targetSymbol[count])
                             {
-                                mobileIndex = +1;
+                                mobileIndex += 1;
                                 count++;
                             }
                             else
@@ -181,20 +185,20 @@ public class Day4(InputType type)
                         }
                     }
                     
-                    //Controllo in basso a sinistra
                     if (i <= input.Matrix.Count - 4 && j >= 3)
                     {
+                        correctValue = true;
                         count = 0;
                         
-                        var verticalIndex = i;
-                        var orizontalIndex = j;
+                        var verticalIndex = i+1;
+                        var orizontalIndex = j-1;
 
                         while (count < 3 && correctValue)
                         {
                             if (input.Matrix[verticalIndex][orizontalIndex] == targetSymbol[count])
                             {
-                                verticalIndex = +1;
-                                orizontalIndex = -1;
+                                verticalIndex += 1;
+                                orizontalIndex -= 1;
                                 count++;
                             }
                             else
@@ -209,20 +213,20 @@ public class Day4(InputType type)
                         }
                     }
                     
-                    //Controllo in basso a destra
                     if (i <= input.Matrix.Count - 4 && j <= input.Matrix.Count - 4)
                     {
+                        correctValue = true;
                         count = 0;
                         
-                        var verticalIndex = i;
-                        var orizontalIndex = j;
+                        var verticalIndex = i+1;
+                        var orizontalIndex = j+1;
 
                         while (count < 3 && correctValue)
                         {
                             if (input.Matrix[verticalIndex][orizontalIndex] == targetSymbol[count])
                             {
-                                verticalIndex = +1;
-                                orizontalIndex = +1;
+                                verticalIndex += 1;
+                                orizontalIndex += 1;
                                 count++;
                             }
                             else
@@ -232,6 +236,43 @@ public class Day4(InputType type)
                         }
                         
                         if (count == 3)
+                        {
+                            numberXmasWord++;
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+        return numberXmasWord;
+    }
+    
+    public int SearchCrossXmasWords()
+    {
+        var input = GetInput();
+
+        int numberXmasWord = 0;
+        
+        for (var i = 0; i < input.Matrix.Count; i++)
+        {
+            for (var j = 0; j < input.Matrix[i].Count; j++)
+            {
+                if (input.Matrix[i][j] == 'A')
+                {
+                    if (i != 0 && i < input.Matrix.Count - 1 && j != 0 && j < input.Matrix[i].Count - 1)
+                    {
+                        var firstString = string.Concat([
+                            input.Matrix[i - 1][j - 1],input.Matrix[i][j],input.Matrix[i+1][j+1]
+                        ]);
+
+                        var secondString = string.Concat([
+                            input.Matrix[i - 1][j + 1],input.Matrix[i][j],input.Matrix[i+1][j-1]
+                        ]);
+
+                        var reverseString = string.Concat(secondString.Reverse());
+
+                        if ((firstString.Equals("SAM") || firstString.Equals("MAS")) && (firstString == secondString || firstString == reverseString))
                         {
                             numberXmasWord++;
                         }
