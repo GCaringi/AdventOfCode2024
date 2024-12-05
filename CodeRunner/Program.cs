@@ -2,14 +2,16 @@
 using CodeRunner.Day1;
 using CodeRunner.Day2;
 using CodeRunner.Day3;
+using CodeRunner.Day4;
 
 Console.WriteLine("Welcome to the Advent of Code 2024");
 
 #region Instanciate Days Entities
 
 Day1 day1 = new(InputType.Input);
-Day2 day2 = new Day2(InputType.Input);
-Day3 day3 = new Day3(InputType.Input);
+Day2 day2 = new(InputType.Input);
+Day3 day3 = new(InputType.Input);
+Day4 day4 = new(InputType.Example);
 
 #endregion
 
@@ -21,7 +23,9 @@ Day3 day3 = new Day3(InputType.Input);
 //Console.WriteLine(day2.GetPositiveSafeReport());
 //Console.WriteLine(day2.GetPositiveSafeReportWithDampener());
 
-Console.WriteLine(day3.CalculateMult());
-Console.WriteLine(day3.CalculateMultWithCommand());
+//Console.WriteLine(day3.CalculateMult());
+//Console.WriteLine(day3.CalculateMultWithCommand());
+
+Console.WriteLine(day4.SearchXmasWords());
 
 #endregion
